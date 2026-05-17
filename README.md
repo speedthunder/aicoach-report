@@ -2,8 +2,6 @@
 
 > 從郵差到 AI Agent 開發者的自學之路
 
-**線上瀏覽：** https://speedthunder.github.io/aicoach-report/
-
 ## 線上瀏覽
 
 **GitHub Pages：** https://speedthunder.github.io/aicoach-report/
