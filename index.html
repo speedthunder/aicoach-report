@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AICOACH 講師共學營｜蔡耀德 學習分享報告</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark:  #1a5c2e;
+      --green-main:  #2e8b57;
+      --green-light: #52c784;
+      --green-pale:  #e8f7ee;
+      --gold:        #f0c040;
+      --blue-tech:   #1565c0;
+      --blue-pale:   #e3f0ff;
+      --text-dark:   #1a2030;
+      --text-mid:    #3d4d60;
+      --text-light:  #6b7a8d;
+      --white:       #ffffff;
+      --shadow-sm:   0 2px 10px rgba(0,0,0,.08);
+      --shadow-md:   0 6px 28px rgba(0,0,0,.13);
+      --radius:      14px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: #f4f8f5;
+      color: var(--text-dark);
+      line-height: 1.75;
+    }
+    a { color: var(--green-main); text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
+      background: rgba(255,255,255,.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--green-light);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 60px;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-logo { font-weight: 900; font-size: 1.05rem; color: var(--green-dark); letter-spacing: .03em; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: .88rem; font-weight: 700; color: var(--text-mid); transition: color .2s; }
+    .nav-links a:hover { color: var(--green-main); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 55%, var(--green-light) 100%);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1.5px solid rgba(255,255,255,.4);
+      border-radius: 50px;
+      padding: 6px 20px;
+      font-size: .82rem; font-weight: 700;
+      letter-spacing: .08em;
+      margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.6rem); font-weight: 900; line-height: 1.2; margin-bottom: 16px; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: 1.15rem; opacity: .9; max-width: 560px; margin-bottom: 36px; }
+    .hero-meta {
+      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+      font-size: .85rem; opacity: .82;
+    }
+    .hero-meta span { background: rgba(255,255,255,.15); border-radius: 50px; padding: 4px 16px; }
+    .scroll-hint {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      font-size: .78rem; opacity: .65; letter-spacing: .06em;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)} }
+
+    /* ── Section ── */
+    section { padding: 80px 24px; max-width: 980px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 52px; }
+    .section-tag {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+      padding: 4px 16px; border-radius: 50px;
+      margin-bottom: 12px;
+    }
+    .section-header h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; color: var(--green-dark); }
+    .section-header p { color: var(--text-light); margin-top: 8px; font-size: .95rem; }
+
+    /* ── Card ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      border: 1.5px solid #e2ece6;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+    /* ── Profile ── */
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media(max-width:640px){ .profile-grid { grid-template-columns: 1fr; } }
+    .profile-avatar {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-main), var(--green-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+    .profile-card h3 { font-size: 1.1rem; font-weight: 900; color: var(--green-dark); margin-bottom: 6px; }
+    .profile-tag {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-main);
+      font-size: .78rem; font-weight: 700;
+      padding: 2px 12px; border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .info-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; font-size: .9rem; }
+    .info-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .info-text strong { color: var(--green-dark); }
+    .highlight-box {
+      background: linear-gradient(120deg, var(--green-pale), var(--blue-pale));
+      border-left: 4px solid var(--green-main);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-top: 16px;
+      font-size: .9rem;
+      color: var(--text-mid);
+    }
+    .highlight-box strong { color: var(--green-dark); }
+
+    /* ── Claude Code Section ── */
+    .steps { display: grid; gap: 20px; }
+    .step-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 26px 30px;
+      border: 1.5px solid #e2ece6;
+      display: flex; gap: 20px; align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .25s;
+    }
+    .step-card:hover { box-shadow: var(--shadow-md); }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--green-main), var(--green-light));
+      color: var(--white); font-weight: 900; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content h4 { font-size: 1rem; font-weight: 900; color: var(--green-dark); margin-bottom: 6px; }
+    .step-content p { font-size: .88rem; color: var(--text-mid); line-height: 1.65; }
+    .code-block {
+      background: #1a2030;
+      color: #a8ffbf;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      line-height: 1.7;
+      margin-top: 12px;
+      overflow-x: auto;
+    }
+    .code-block .cmt { color: #6b8a6b; }
+    .code-block .kw  { color: #79d5f7; }
+    .code-block .str { color: #f7c948; }
+    .analogy-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px; }
+    @media(max-width:640px){ .analogy-grid { grid-template-columns: 1fr; } }
+    .analogy-card {
+      background: var(--green-pale);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      border: 1.5px solid #c8e8d4;
+    }
+    .analogy-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .analogy-card h5 { font-size: .88rem; font-weight: 900; color: var(--green-dark); margin-bottom: 4px; }
+    .analogy-card p { font-size: .8rem; color: var(--text-mid); }
+
+    /* ── 競賽企劃書 ── */
+    .proposal-hero {
+      background: linear-gradient(135deg, var(--blue-tech) 0%, #0d47a1 100%);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      color: var(--white);
+      margin-bottom: 32px;
+      position: relative; overflow: hidden;
+    }
+    .proposal-hero::after {
+      content: 'AI';
+      position: absolute; right: -10px; bottom: -30px;
+      font-size: 9rem; font-weight: 900; opacity: .07;
+      pointer-events: none;
+    }
+    .proposal-hero h3 { font-size: clamp(1.3rem,3.5vw,1.9rem); font-weight: 900; margin-bottom: 10px; }
+    .proposal-hero p { opacity: .88; font-size: .92rem; max-width: 580px; }
+    .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .badge {
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: .78rem; font-weight: 700;
+    }
+    .proposal-section { margin-bottom: 40px; }
+    .proposal-section h3 {
+      font-size: 1.15rem; font-weight: 900;
+      color: var(--blue-tech);
+      display: flex; align-items: center; gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--blue-pale);
+      margin-bottom: 18px;
+    }
+    .proposal-section h3 .p-icon { font-size: 1.3rem; }
+    .need-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media(max-width:640px){ .need-grid { grid-template-columns: 1fr; } }
+    .need-card {
+      background: var(--blue-pale);
+      border-radius: 10px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--blue-tech);
+    }
+    .need-card h5 { font-size: .88rem; font-weight: 900; color: var(--blue-tech); margin-bottom: 4px; }
+    .need-card p { font-size: .82rem; color: var(--text-mid); }
+    .flow-steps { display: grid; gap: 12px; }
+    .flow-step {
+      background: var(--white);
+      border: 1.5px solid #d0e4f7;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .flow-step .f-num {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: var(--blue-tech); color: var(--white);
+      font-weight: 900; font-size: .88rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .flow-step .f-content h5 { font-size: .9rem; font-weight: 900; color: var(--blue-tech); margin-bottom: 3px; }
+    .flow-step .f-content p { font-size: .82rem; color: var(--text-mid); }
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media(max-width:640px){ .tech-grid { grid-template-columns: 1fr; } }
+    .tech-card {
+      background: var(--white);
+      border: 1.5px solid #d0e4f7;
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .tech-card h5 { font-size: .88rem; font-weight: 900; color: var(--blue-tech); margin-bottom: 8px; }
+    .tech-tag {
+      display: inline-block;
+      background: #e3f0ff;
+      color: var(--blue-tech);
+      font-size: .73rem; font-weight: 700;
+      padding: 2px 10px; border-radius: 50px;
+      margin: 2px 2px 2px 0;
+    }
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--blue-tech), var(--green-main));
+    }
+    .tl-item { position: relative; margin-bottom: 22px; }
+    .tl-item::before {
+      content: ''; position: absolute; left: -24px; top: 5px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--blue-tech);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--blue-tech);
+    }
+    .tl-item h5 { font-size: .9rem; font-weight: 900; color: var(--blue-tech); margin-bottom: 4px; }
+    .tl-item p { font-size: .83rem; color: var(--text-mid); }
+    .join-reasons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media(max-width:720px){ .join-reasons { grid-template-columns: 1fr; } }
+    .reason-card {
+      background: linear-gradient(135deg, var(--green-pale), #f0f8ff);
+      border-radius: 12px;
+      padding: 22px 18px;
+      text-align: center;
+      border: 1.5px solid #c8e8d4;
+    }
+    .reason-card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .reason-card h5 { font-size: .9rem; font-weight: 900; color: var(--green-dark); margin-bottom: 6px; }
+    .reason-card p { font-size: .8rem; color: var(--text-mid); }
+    .cta-box {
+      background: linear-gradient(135deg, var(--green-dark), var(--blue-tech));
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      text-align: center;
+      color: var(--white);
+      margin-top: 40px;
+    }
+    .cta-box h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; }
+    .cta-box p { opacity: .88; font-size: .95rem; margin-bottom: 24px; }
+    .cta-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #1a2030;
+      font-weight: 900; font-size: .95rem;
+      padding: 12px 36px; border-radius: 50px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(240,192,64,.4);
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(240,192,64,.5); color: #1a2030; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--green-dark);
+      color: rgba(255,255,255,.7);
+      font-size: .82rem;
+    }
+    footer strong { color: var(--green-light); }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 2px dashed #d0e8d8; margin: 8px 0 32px; }
+
+    /* ── Fade-in animation ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="nav-logo">AICOACH 共學營｜蔡耀德</div>
+  <div class="nav-links">
+    <a href="#intro">自介</a>
+    <a href="#claude">Claude Code</a>
+    <a href="#proposal">競賽企劃</a>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-badge">AICOACH 講師共學營 學習分享</div>
+  <h1>從郵差到 <span>AI Agent</span><br>開發者的自學之路</h1>
+  <p>用實際操作取代理論，從每一次錯誤中學習，<br>以 Claude Code 打造 AI 智慧健康社區解決方案</p>
+  <div class="hero-meta">
+    <span>分享者：蔡耀德</span>
+    <span>中華郵政</span>
+    <span>2026 科技新創競賽</span>
+    <span>AI Agent 應用</span>
+  </div>
+  <div class="scroll-hint">▼ 向下滾動開始閱讀</div>
+</div>
+
+<!-- ═══════════════════════════════ SECTION 1 自介 ═══════════════════════════════ -->
+<section id="intro">
+  <div class="section-header fade-in">
+    <div class="section-tag">SECTION 01</div>
+    <h2>關於我自己</h2>
+    <p>一位送信的郵差，走上 AI 自學之路的故事</p>
+  </div>
+
+  <div class="profile-grid fade-in">
+    <!-- 左欄：個人資料 -->
+    <div class="card">
+      <div class="profile-avatar">📮</div>
+      <div class="profile-tag">中華郵政 ｜ 郵差</div>
+      <h3>蔡耀德</h3>
+      <div class="info-row">
+        <span class="info-icon">🏢</span>
+        <div class="info-text"><strong>任職單位：</strong>中華郵政股份有限公司</div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💼</span>
+        <div class="info-text"><strong>職務：</strong>投遞人員（郵差）</div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📚</span>
+        <div class="info-text"><strong>學習緣起：</strong>大型語言模型實作讀書會</div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">👨‍🏫</span>
+        <div class="info-text"><strong>指導老師：</strong>李詩欽老師</div>
+      </div>
+      <div class="highlight-box">
+        <strong>學習態度：</strong><br>
+        我是以「玩票性質」的方式自學 AI，沒有系統性的理論基礎，全靠實際動手操作，從錯誤中摸索前進。內容若有不足之處，請各位前輩不吝指導！
+      </div>
+    </div>
+
+    <!-- 右欄：學習歷程 -->
+    <div class="card">
+      <div class="profile-tag">我的 AI 學習歷程</div>
+      <h3 style="margin-bottom:18px;color:var(--green-dark)">從零開始的自學旅程</h3>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="f-num">1</div>
+          <div class="f-content">
+            <h5>加入讀書會</h5>
+            <p>跟著李詩欽老師，從「大型語言模型實作讀書會」開始，接觸 AI 的世界</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="f-num">2</div>
+          <div class="f-content">
+            <h5>實作優先</h5>
+            <p>不從教科書出發，而是直接操作工具，遇到問題就解決問題</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="f-num">3</div>
+          <div class="f-content">
+            <h5>發現 Claude Code</h5>
+            <p>開始使用 Anthropic 的 Claude Code CLI，體驗 AI Agent 自動完成任務的魔力</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="f-num">4</div>
+          <div class="f-content">
+            <h5>參加競賽</h5>
+            <p>挑戰 2026 科技新創競賽 AI 轉型組，把學到的技能應用在真實商業問題上</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 2 Claude Code ═══════════════════════════════ -->
+<section id="claude">
+  <div class="section-header fade-in">
+    <div class="section-tag">SECTION 02</div>
+    <h2>什麼是 Claude Code？</h2>
+    <p>說明這個超強 AI 助理</p>
+  </div>
+
+  <!-- 類比說明 -->
+  <div class="card fade-in" style="margin-bottom:28px;">
+    <h3 style="color:var(--green-dark);margin-bottom:16px;">一句話解釋</h3>
+    <p style="font-size:1.1rem;font-weight:700;color:var(--text-dark);margin-bottom:16px;">
+      Claude Code 就像是你的「超聰明 AI 工程師助理」，你只要用<strong style="color:var(--green-main)">中文</strong>告訴它你想做什麼，它就會自動幫你寫程式、讀檔案、找資料、甚至佈署網站。
+    </p>
+    <div class="analogy-grid">
+      <div class="analogy-card">
+        <div class="icon">🎮</div>
+        <h5>就像遊戲的 NPC</h5>
+        <p>你下指令，它執行任務，比人類助理快 100 倍</p>
+      </div>
+      <div class="analogy-card">
+        <div class="icon">🧠</div>
+        <h5>會思考、會規劃</h5>
+        <p>不只是翻譯指令，它會自己拆解複雜任務成小步驟</p>
+      </div>
+      <div class="analogy-card">
+        <div class="icon">🔧</div>
+        <h5>真的能動手做</h5>
+        <p>可以讀寫電腦上的檔案、執行程式、搜尋網路</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五大核心概念 -->
+  <div class="steps fade-in">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>安裝與啟動：就像開啟 App 一樣簡單</h4>
+        <p>只需要有電腦、有網路，在終端機輸入一行指令就能開始。不需要懂複雜的程式語法，用中文打字就能操作。</p>
+        <div class="code-block">
+<span class="cmt"># 安裝 Claude Code（只需做一次）</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="cmt"># 在你的專案資料夾中啟動</span>
+claude
+
+<span class="cmt"># 然後直接用中文說話：</span>
+<span class="str">"幫我建立一個 AI 健康管理網頁，要有登入功能"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>AI Agent 是什麼？就是「自動完成任務的 AI 機器人」</h4>
+        <p>普通 AI 只會「回答問題」，但 AI Agent 會「採取行動」。它能主動規劃步驟、呼叫工具、執行程式，像一個真正的員工一樣替你工作，完成後再報告給你。</p>
+        <div class="code-block">
+<span class="cmt"># 範例：讓 Claude Code 幫你建立 AI 健康管理 Agent</span>
+<span class="kw">你說：</span> <span class="str">"幫我建立一個 AI Agent，
+          能自動讀取病患生理數據，
+          並在異常時發送 LINE 通知"</span>
+
+<span class="cmt"># Claude Code 會自動：</span>
+<span class="cmt"># 1. 分析需求</span>
+<span class="cmt"># 2. 規劃架構</span>
+<span class="cmt"># 3. 寫出完整程式碼</span>
+<span class="cmt"># 4. 測試並修正錯誤</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>我如何用 Claude Code 參加科技新創競賽？</h4>
+        <p>這次競賽要解決「AI 智慧健康社區」的問題，我沒有軟體開發背景，但透過 Claude Code，我能夠：</p>
+        <ul style="margin-top:10px;padding-left:20px;font-size:.88rem;color:var(--text-mid);line-height:2;">
+          <li>分析競賽需求文件（PDF），快速理解技術要求</li>
+          <li>設計 Agentic AI 的系統架構，讓 AI 主動監測健康數據</li>
+          <li>串接 FHIR 醫療資料交換標準（AI 幫我學，邊學邊做）</li>
+          <li>生成 LINE Bot 通知程式碼，實現即時健康警示</li>
+          <li>建立這份可放在 GitHub Pages 的報告網頁</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>最大的收穫：從「不懂程式」到「指揮 AI 寫程式」</h4>
+        <p>以前我覺得「寫程式」是工程師才能做的事。現在我發現，重點不是你會不會寫程式，而是你能不能把問題<strong style="color:var(--green-main)">說清楚</strong>。Claude Code 會把你的想法變成真實可執行的程式。</p>
+        <div class="highlight-box" style="margin-top:14px;">
+          <strong>郵差的體悟：</strong> 以前我每天騎車送信，路線都要自己規劃。現在用 Claude Code，就像有個超聰明的 AI 幫我規劃最佳路線，而且還能自動通知收件人。這就是 AI Agent 的力量！
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 3 競賽企劃書 ═══════════════════════════════ -->
+<section id="proposal">
+  <div class="section-header fade-in">
+    <div class="section-tag">SECTION 03</div>
+    <h2>2026 科技新創競賽｜專案企劃書</h2>
+    <p>一起用 AI 打造智慧健康社區，你也可以來參加！</p>
+  </div>
+
+  <!-- 封面 -->
+  <div class="proposal-hero fade-in">
+    <div class="badge-row">
+      <span class="badge">2026 StartupChallenge</span>
+      <span class="badge">AI 轉型組</span>
+      <span class="badge">經濟部中小及新創企業署</span>
+    </div>
+    <h3 style="margin-top:16px;">AI 領航全人守護<br>打造具備長期陪伴與數據驅動之<br>精準健康管理社區據點</h3>
+    <p style="margin-top:12px;">在高齡化社會浪潮下，社區居民的健康管理需求日益迫切。這個競賽題目要我們用最前端的 Agentic AI 技術，打造一個真正能主動關心住戶、即時響應健康警報的智慧社區系統——這不只是比賽，更是一次改變臺灣醫療照護模式的機會。</p>
+  </div>
+
+  <div class="card fade-in">
+
+    <!-- 一、問題背景 -->
+    <div class="proposal-section">
+      <h3><span class="p-icon">🔍</span> 一、問題背景與商機</h3>
+      <p style="font-size:.9rem;color:var(--text-mid);margin-bottom:16px;">
+        台灣正快速步入超高齡社會。根據國發會預測，2026 年老年人口比率將突破 20%。然而，現有的社區健康服務仍停留在「被動等待」模式——住戶有不舒服才去看診，沒有預防性的主動關懷機制。
+      </p>
+      <div class="need-grid">
+        <div class="need-card">
+          <h5>現況痛點 1：數據孤島</h5>
+          <p>生理量測數據分散在各設備，無法整合分析，健康趨勢不可見</p>
+        </div>
+        <div class="need-card">
+          <h5>現況痛點 2：服務被動</h5>
+          <p>藥師、營養師只能等住戶上門，無法主動發現高風險族群</p>
+        </div>
+        <div class="need-card">
+          <h5>商機 1：精準健康管理</h5>
+          <p>數據驅動的個人化健康建議，比傳統衛教更有效率</p>
+        </div>
+        <div class="need-card">
+          <h5>商機 2：社區服務升級</h5>
+          <p>AI 將被動服務人員升級為主動式「健康教練」，提升服務價值</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 二、解決方案 -->
+    <div class="proposal-section">
+      <h3><span class="p-icon">💡</span> 二、核心解決方案：Agentic AI 智慧健康平台</h3>
+      <p style="font-size:.9rem;color:var(--text-mid);margin-bottom:16px;">
+        我們要建立一個「會主動思考、主動行動」的 AI 系統，不是只會傳送固定通知的機器人。
+      </p>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="f-num">①</div>
+          <div class="f-content">
+            <h5>多源數據採集</h5>
+            <p>整合式生理量測儀（血壓、血氧、心率）+ 居家穿戴裝置 + 社區 App，持續累積睡眠、活動量、互動行為等多維數據</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="f-num">②</div>
+          <div class="f-content">
+            <h5>AI 智慧分析引擎</h5>
+            <p>Agentic AI 平台整合近期生理數據、設備使用頻率與歷史趨勢，自動判斷健康風險等級，識別異常行為模式</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="f-num">③</div>
+          <div class="f-content">
+            <h5>主動個人化互動</h5>
+            <p>AI Agent 不發固定通知，而是自動生成個人化關懷訊息，透過 App / LINE 推送適合的健康建議與社區服務推薦</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="f-num">④</div>
+          <div class="f-content">
+            <h5>雙層觸發機制</h5>
+            <p>住戶未回應時，自動升級觸發第二層：通知社區服務人員（藥師/營養師）主動聯繫，形成人機協作的照護網絡</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="f-num">⑤</div>
+          <div class="f-content">
+            <h5>閉環學習優化</h5>
+            <p>互動結果、參與狀況持續回寫平台，作為 Agent 後續判斷依據，系統越用越聰明，服務越來越精準</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 三、技術架構 -->
+    <div class="proposal-section">
+      <h3><span class="p-icon">⚙️</span> 三、技術架構（用 Claude Code 開發）</h3>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <h5>硬體層</h5>
+          <span class="tech-tag">整合式生理量測儀</span>
+          <span class="tech-tag">居家穿戴裝置</span>
+          <span class="tech-tag">智慧平板</span>
+          <span class="tech-tag">數位互動牆</span>
+        </div>
+        <div class="tech-card">
+          <h5>AI / 軟體層</h5>
+          <span class="tech-tag">Agentic AI 平台</span>
+          <span class="tech-tag">個人化內容引擎</span>
+          <span class="tech-tag">Claude API</span>
+          <span class="tech-tag">LINE Bot</span>
+        </div>
+        <div class="tech-card">
+          <h5>數據互通標準</h5>
+          <span class="tech-tag">FHIR R4 介接</span>
+          <span class="tech-tag">健康資料中台</span>
+          <span class="tech-tag">HL7 標準</span>
+          <span class="tech-tag">國際資料交換</span>
+        </div>
+        <div class="tech-card">
+          <h5>空間與人員</h5>
+          <span class="tech-tag">健康感測區</span>
+          <span class="tech-tag">線上諮詢空間</span>
+          <span class="tech-tag">AI 健康教練</span>
+          <span class="tech-tag">SOP 培訓手冊</span>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="margin-top:20px;background:linear-gradient(120deg,#e3f0ff,var(--blue-pale));border-left-color:var(--blue-tech);">
+        <strong>Claude Code 在競賽中的角色：</strong><br>
+        我們用 Claude Code 作為開發加速器——讀取競賽需求、自動生成 FHIR 資料結構、撰寫 AI Agent 邏輯程式碼、測試 LINE Bot 串接，整個開發流程比傳統方式快了至少 5 倍。
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 四、執行時程 -->
+    <div class="proposal-section">
+      <h3><span class="p-icon">📅</span> 四、競賽執行時程</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <h5>Phase 1｜需求分析與系統設計（第 1-2 週）</h5>
+          <p>深入研讀競賽題目，訪談潛在用戶，完成系統架構設計圖與資料流規劃</p>
+        </div>
+        <div class="tl-item">
+          <h5>Phase 2｜AI 核心功能開發（第 3-5 週）</h5>
+          <p>建立 Agentic AI 平台骨架，完成生理數據分析模型，串接 FHIR 資料交換介面</p>
+        </div>
+        <div class="tl-item">
+          <h5>Phase 3｜前端介面與通知系統（第 6-7 週）</h5>
+          <p>開發社區 App 介面、LINE Bot 通知機制、數位互動牆展示系統</p>
+        </div>
+        <div class="tl-item">
+          <h5>Phase 4｜場域測試與優化（第 8-9 週）</h5>
+          <p>實際進入社區場域測試，收集使用者回饋，快速迭代優化</p>
+        </div>
+        <div class="tl-item">
+          <h5>Phase 5｜成果展示與簡報（第 10 週）</h5>
+          <p>完成競賽成果報告、Demo 展示，準備評審簡報</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 五、需要的夥伴 -->
+    <div class="proposal-section">
+      <h3><span class="p-icon">👥</span> 五、我們需要的團隊夥伴</h3>
+      <div class="need-grid">
+        <div class="need-card" style="border-color:var(--green-main);background:var(--green-pale);">
+          <h5 style="color:var(--green-dark);">AI / 軟體開發者</h5>
+          <p>熟悉 Python 或 JavaScript，對 AI API 有興趣，願意用 Claude Code 加速開發</p>
+        </div>
+        <div class="need-card" style="border-color:var(--green-main);background:var(--green-pale);">
+          <h5 style="color:var(--green-dark);">醫療 / 健康領域專家</h5>
+          <p>藥師、護理師、營養師，或對數位健康有興趣的醫學背景人士</p>
+        </div>
+        <div class="need-card" style="border-color:var(--green-main);background:var(--green-pale);">
+          <h5 style="color:var(--green-dark);">UI / UX 設計師</h5>
+          <p>設計對高齡族群友善的介面，讓科技產品真正被用戶接受與喜愛</p>
+        </div>
+        <div class="need-card" style="border-color:var(--green-main);background:var(--green-pale);">
+          <h5 style="color:var(--green-dark);">企劃 / 商業模式</h5>
+          <p>協助撰寫競賽報告、設計商業模式，思考如何把技術轉化為可持續的服務</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 六、為什麼要參加 -->
+    <div class="proposal-section">
+      <h3><span class="p-icon">🏆</span> 六、為什麼你應該加入？</h3>
+      <div class="join-reasons">
+        <div class="reason-card">
+          <div class="icon">🎯</div>
+          <h5>真實商業問題</h5>
+          <p>不是做玩具，是解決台灣社會真實存在的高齡照護缺口，有機會成為真正的產品</p>
+        </div>
+        <div class="reason-card">
+          <div class="icon">🚀</div>
+          <h5>AI 工具實戰</h5>
+          <p>全程使用 Claude Code 開發，快速學習 Agentic AI、FHIR、LINE Bot 整合等前沿技術</p>
+        </div>
+        <div class="reason-card">
+          <div class="icon">🌟</div>
+          <h5>官方資源支援</h5>
+          <p>競賽方提供專科藥師、營養師諮詢團隊，以及 AI 研發與場域執行人力的資源支援</p>
+        </div>
+        <div class="reason-card">
+          <div class="icon">💰</div>
+          <h5>競賽獎項</h5>
+          <p>經濟部主辦，豐厚獎金加持，優勝團隊有機會獲得進一步孵化輔導資源</p>
+        </div>
+        <div class="reason-card">
+          <div class="icon">📱</div>
+          <h5>跨域人脈</h5>
+          <p>與來自軟體、醫療、設計等不同背景的優秀夥伴合作，拓展人脈與視野</p>
+        </div>
+        <div class="reason-card">
+          <div class="icon">📊</div>
+          <h5>作品集加值</h5>
+          <p>完整的 AI Agent 應用專案，是履歷與作品集的最佳展示，讓你在 AI 時代脫穎而出</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end card -->
+
+  <!-- CTA -->
+  <div class="cta-box fade-in">
+    <h3>一起改變台灣的智慧健康照護！</h3>
+    <p>
+      就算你像我一樣，沒有軟體背景、沒有理論基礎，<br>
+      只要有一顆想解決問題的心，Claude Code 會是你最強的夥伴。<br>
+      <strong style="color:var(--gold);">2026 科技新創競賽 AI 轉型組，我們一起參加！</strong>
+    </p>
+    <a href="https://greentech.startupterrace.tw/greentech/about" class="cta-btn" target="_blank" rel="noopener">
+      了解競賽詳情
+    </a>
+  </div>
+
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>
+    <strong>AICOACH 講師共學營</strong> × 蔡耀德 學習分享報告<br>
+    從郵差到 AI Agent 開發者 ｜ 感謝李詩欽老師的帶領<br>
+    <span style="opacity:.5;font-size:.78rem;">Built with Claude Code · 2026</span>
+  </p>
+</footer>
+
+<!-- ── Fade-in Observer ── -->
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
